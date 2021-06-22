@@ -1,0 +1,19 @@
+{
+  "name": "naomimango_6_22062021",
+  "version": "1.0.0",
+  "description": "Projet 6 OpenClassrooms \"Développeur web\" - So Pekocko",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NaoDevWeb31/NaomiMango_6_22062021.git"
+  },
+  "author": "NaoDevWeb31",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NaoDevWeb31/NaomiMango_6_22062021/issues"
+  },
+  "homepage": "https://github.com/NaoDevWeb31/NaomiMango_6_22062021#readme"
+}
