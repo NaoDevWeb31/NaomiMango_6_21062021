@@ -4,7 +4,8 @@
   "description": "Projet 6 OpenClassrooms \"Développeur web\" - So Pekocko",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/NaoDevWeb31/NaomiMango_6_22062021/issues"
   },
-  "homepage": "https://github.com/NaoDevWeb31/NaomiMango_6_22062021#readme"
+  "homepage": "https://github.com/NaoDevWeb31/NaomiMango_6_22062021#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
