@@ -41,6 +41,26 @@ exports.getOneSauce = (req, res, next) => {
         });
 };
 
+// Import de la logique métier de la route PUT
+exports.modifySauce = (req, res, next) => {
+    // Créer un objet "sauceObject" qui regarde si "req.file" existe ou non
+    const sauceObject = req.file ?
+        // S'il existe, traiter la nouvelle image
+        {
+            ...JSON.parse(req.body.sauce),
+            imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+            // Sinon, traiter simplement l'objet entrant
+        } : { ...req.body };
+    // Créer une instance Sauce à partir de sauceObject et la mettre à jour
+    Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
+        .then(() => {
+            res.status(201).json({ message: "La sauce a été mise à jour avec succès !" });
+        })
+        .catch((error) => {
+            res.status(400).json({ error: error });
+        });
+};
+
 // Import de la logique métier de la route GET
 exports.getAllSauces = (req, res, next) => {
     // Récupérer un tableau contenant toutes les instances du modèle dans la database

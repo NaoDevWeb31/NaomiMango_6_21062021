@@ -13,6 +13,7 @@ const sauceCtrl = require("../controllers/sauce");
 router.get("/", auth, sauceCtrl.getAllSauces);
 router.post("/", auth, multer, sauceCtrl.createSauce);
 router.get("/:id", auth, sauceCtrl.getOneSauce);
+router.put('/:id', auth, multer, sauceCtrl.modifySauce);
 
 // Permettre l'export du routeur sur d'autres fichiers
 module.exports = router;
