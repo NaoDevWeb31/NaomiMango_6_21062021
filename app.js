@@ -1,5 +1,15 @@
 // Import de packages dans l'appli
 const express = require("express");
+const mongoose = require("mongoose"); // Facilite les interactions avec la base de données
+
+// Connecter l'API au cluster MongoDB Atlas
+mongoose.connect("mongodb+srv://new-user-OC:H5Ja4yCCmNhAyB5@clusteroc.rz1xn.mongodb.net/So_Pekocko?retryWrites=true&w=majority",
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    .then(() => console.log("Connexion à MongoDB Atlas réussie !"))
+    .catch(() => console.log("Connexion à MongoDB Atlas échouée !"));
 
 // Créer l'appli
 const app = express();
@@ -14,6 +24,9 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
+
+// Extraire et analyser les objets JSON des requêtes POST
+app.use(express.json());
 
 //TEST
 app.use((req, res, next) => {
