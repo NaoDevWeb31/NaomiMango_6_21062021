@@ -4,6 +4,7 @@ const mongoose = require("mongoose"); // Facilite les interactions avec la base 
 
 // Import des routeurs dans l'appli
 const userRoutes = require("./routes/user");
+const sauceRoutes = require("./routes/sauce");
 
 // Connecter l'API au cluster MongoDB Atlas
 mongoose.set("useCreateIndex", true);
@@ -40,6 +41,8 @@ app.use((req, res, next) => {
 
 // Utiliser du routeur "user" pour toutes les requêtes vers "/api/auth" dans l'appli
 app.use("/api/auth", userRoutes);
+// Utiliser du routeur "sauce" pour toutes les requêtes vers "/api/sauces" dans l'appli
+app.use("/api/sauces", sauceRoutes);
 
 // Permettre l'export de l'appli sur d'autres fichiers
 module.exports = app;
