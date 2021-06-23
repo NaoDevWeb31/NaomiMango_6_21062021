@@ -2,7 +2,11 @@
 const express = require("express");
 const mongoose = require("mongoose"); // Facilite les interactions avec la base de données
 
+// Import des routeurs dans l'appli
+const userRoutes = require("./routes/user");
+
 // Connecter l'API au cluster MongoDB Atlas
+mongoose.set("useCreateIndex", true);
 mongoose.connect("mongodb+srv://new-user-OC:H5Ja4yCCmNhAyB5@clusteroc.rz1xn.mongodb.net/So_Pekocko?retryWrites=true&w=majority",
     {
         useNewUrlParser: true,
@@ -33,6 +37,9 @@ app.use((req, res, next) => {
     res.json({ message: "Votre requête a bien été reçue !" });
     next();
 });
+
+// Utiliser du routeur "user" pour toutes les requêtes vers "/api/auth" dans l'appli
+app.use("/api/auth", userRoutes);
 
 // Permettre l'export de l'appli sur d'autres fichiers
 module.exports = app;
