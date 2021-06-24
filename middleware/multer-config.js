@@ -17,11 +17,12 @@ const storage = multer.diskStorage({
     // Indiquer à multer
     filename: (req, file, callback) => {
         // D'utiliser le nom d'origine et de remplacer les " " par des "_"
-        const name = file.originalname.split(" ").join("_");
+        const ogName = file.originalname;
+        const name = ogName.split(" ").join("_").slice(0, ogName.lastIndexOf("."));
         // D'utiliser "MIME_TYPES" pour résoudre l'extension de fichier appropriée (mimetype du fichier envoyé par le frontend)
         const extension = MIME_TYPES[file.mimetype];
         // D'ajouter aussi un timestamp "Date.now()" dans le nom de fichier
-        callback(null, name + Date.now() + "." + extension);
+        callback(null, name + "_" + Date.now() + "." + extension);
     }
 });
 
