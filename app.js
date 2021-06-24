@@ -2,14 +2,14 @@
 const express = require("express");
 const mongoose = require("mongoose"); // Facilite les interactions avec la base de données
 const path = require("path"); // Accède au path de notre serveur
-
+require("dotenv").config(); // Charge les variables d'environnement d'un fichier ".env" dans "process.env." (masque les infos de connexion à MongoDB Atlas)
 
 // Import des routeurs dans l'appli
 const userRoutes = require("./routes/user");
 const sauceRoutes = require("./routes/sauce");
 
 // Connecter l'API au cluster MongoDB Atlas
-mongoose.connect("mongodb+srv://new-user-OC:H5Ja4yCCmNhAyB5@clusteroc.rz1xn.mongodb.net/So_Pekocko?retryWrites=true&w=majority",
+mongoose.connect(process.env.DB_URI,
     {
         useCreateIndex: true,
         useNewUrlParser: true,
