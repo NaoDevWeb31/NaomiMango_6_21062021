@@ -6,6 +6,7 @@ require("dotenv").config(); // Charge les variables d'environnement d'un fichier
 const session = require("express-session"); // Empêche le piratage de session
 const helmet = require("helmet"); // Protège contre les attaques XSS
 const xss = require("xss-clean"); // Protège contre les attaques XSS
+const cors = require("cors"); // Permettre le partage de ressources entre origines multiples
 
 // Import des routeurs dans l'appli
 const userRoutes = require("./routes/user");
@@ -62,6 +63,9 @@ app.use(helmet());
 
 // Protéger les formulaires, URL et requêtes des attaques XSS
 app.use(xss());
+
+// Protéger les données en transit
+app.use(cors());
 
 // Utiliser le gestionnaire de routage pour gérer le sous-dosser "images" de manière statique à chaque fois qu'elle reçoit une requête vers la route "/images"
 app.use("/images", express.static(path.join(__dirname, "images")));
