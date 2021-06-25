@@ -4,6 +4,8 @@ const mongoose = require("mongoose"); // Facilite les interactions avec la base 
 const path = require("path"); // Accède au path de notre serveur
 require("dotenv").config(); // Charge les variables d'environnement d'un fichier ".env" dans "process.env." (masque les infos de connexion à MongoDB Atlas)
 const session = require("express-session"); // Empêche le piratage de session
+const helmet = require("helmet"); // Protège contre les attaques XSS
+const xss = require("xss-clean"); // Protège contre les attaques XSS
 
 // Import des routeurs dans l'appli
 const userRoutes = require("./routes/user");
@@ -49,11 +51,17 @@ app.use(
         httpOnly: true,
       }
     })
-  );
+);
 
 // Extraire et analyser les objets JSON des requêtes POST
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Empêcher certaines failles XSS et la perte de contrôle du navigateur (données de l'appli)
+app.use(helmet());
+
+// Protéger les formulaires, URL et requêtes des attaques XSS
+app.use(xss());
 
 // Utiliser le gestionnaire de routage pour gérer le sous-dosser "images" de manière statique à chaque fois qu'elle reçoit une requête vers la route "/images"
 app.use("/images", express.static(path.join(__dirname, "images")));
