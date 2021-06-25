@@ -7,6 +7,7 @@ const session = require("express-session"); // Empêche le piratage de session
 const helmet = require("helmet"); // Protège contre les attaques XSS
 const xss = require("xss-clean"); // Protège contre les attaques XSS
 const cors = require("cors"); // Permettre le partage de ressources entre origines multiples
+const rateLimit = require("express-rate-limit");// Protège contre les attaques DDos qui rendent inaccessible/indisponible un serveur ou un service
 
 // Import des routeurs dans l'appli
 const userRoutes = require("./routes/user");
@@ -66,6 +67,15 @@ app.use(xss());
 
 // Protéger les données en transit
 app.use(cors());
+
+// Limiter l’envoi de requêtes répétées pour éviter la saturation
+const limiter = rateLimit({
+    windowMs: 10 * 60 * 1000, // 10 mins
+    max: 100, // Limiter chaque IP à 100 requêtes par windowMs
+    message: "Vous avez dépassé le nombre de requêtes autorisées en 5 minutes !"
+});
+// Appliquer à toutes les requêtes de l'appli
+app.use(limiter);
 
 // Utiliser le gestionnaire de routage pour gérer le sous-dosser "images" de manière statique à chaque fois qu'elle reçoit une requête vers la route "/images"
 app.use("/images", express.static(path.join(__dirname, "images")));
