@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose"); // Facilite les interactions avec la base de données
 const path = require("path"); // Accède au path de notre serveur
 require("dotenv").config(); // Charge les variables d'environnement d'un fichier ".env" dans "process.env." (masque les infos de connexion à MongoDB Atlas)
+const session = require("express-session"); // Empêche le piratage de session
 
 // Import des routeurs dans l'appli
 const userRoutes = require("./routes/user");
@@ -25,15 +26,34 @@ const app = express();
 app.use((req, res, next) => {
     // Accèder à notre API depuis n'importe quelle origine
     res.setHeader("Access-Control-Allow-Origin", "*");
-    // Ajouter les headers mentionnés aux reqûetes envoyées vers notre API
+    // Ajouter les headers mentionnés aux requêtes envoyées vers notre API
     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization");
     // Envoyer des requêtes avec les méthodes mentionnées
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
     next();
 });
 
+// Middleware pour protéger la session et les cookies
+// Créer 2h à partir de ms
+const twoHours = 1000 * 60 * 120; // 1000ms * 60s * 120min
+app.use(
+    session({
+      name: "sessionForApplication",
+      secret: process.env.SESSION_SECRET,
+      saveUninitialized: true,
+      resave: false,
+      cookie: {
+        secure: true,
+        maxAge: twoHours,
+        domain: process.env.APP_DOMAIN,
+        httpOnly: true,
+      }
+    })
+  );
+
 // Extraire et analyser les objets JSON des requêtes POST
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Utiliser le gestionnaire de routage pour gérer le sous-dosser "images" de manière statique à chaque fois qu'elle reçoit une requête vers la route "/images"
 app.use("/images", express.static(path.join(__dirname, "images")));
