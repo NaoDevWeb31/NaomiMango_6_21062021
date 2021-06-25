@@ -25,7 +25,7 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-    // Récuperer l'email saisie
+    // Récupérer l'email saisie
     User.findOne({ email: req.body.email })
         .then(user => {
             // Si l'utilisateur ne correspond pas à un utilisateur existant de la base de données
@@ -39,6 +39,7 @@ exports.login = (req, res, next) => {
                 .then(valid => {
                     // Si le mdp saisi ne correspond pas
                     if (!valid) {
+                        console.log("Tentative de connexion de l'utilisateur " + req.body.email + " mais mot de passe incorrect !");
                         return res.status(401).json({ error: "Mot de passe incorrect !" });
                     }
                     // Si le mdp saisi correspond, renvoyer l'identifiant userID et un token (jeton Web JSON) au front-end
@@ -54,7 +55,7 @@ exports.login = (req, res, next) => {
                             { expiresIn: "2h" }
                         )
                     });
-                    console.log("L'utilisateur " + user._id + " est désormais connecté !");
+                    console.log("L'utilisateur " + req.body.email+ " ayant l'userId " + user._id + " est désormais connecté !");
                 })
                 .catch(error => res.status(500).json({ error }));
         })

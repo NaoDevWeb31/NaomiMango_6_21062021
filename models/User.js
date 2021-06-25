@@ -3,12 +3,18 @@ const mongoose = require("mongoose"); // Facilite les interactions avec la base 
 const uniqueValidator = require("mongoose-unique-validator");
 
 const userSchema = mongoose.Schema({
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true }
+    email: { 
+        type: String, 
+        required: [true, "Veuillez remplir votre adresse email !"], 
+        unique: true, 
+        match: [/^[a-zA-Z0-9&^_¨-]+(?:.[a-zA-Z0-9&^_¨-]+)@[a-zA-Z]+[.](?:[a-z]{2,3})$/, "Adresse email incorrecte !"]
+    },
+    password: { type: String, 
+        required: [true, "Veuillez remplir votre mot de passe !"] }
 });
 
 // Utiliser le package de validation dans le schéma (s'assurer que 2 users ne puissent partager la même adresse email)
-userSchema.plugin(uniqueValidator);
+userSchema.plugin(uniqueValidator, {message: "Cette adresse email a déjà été utilisée !"});
 
 // Permettre l'export du schéma dans d'autres fichiers
 module.exports = mongoose.model("User", userSchema);
