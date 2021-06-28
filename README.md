@@ -10,10 +10,12 @@ Créer un MVP appelé “Piquante”, permettant aux utilisateurs d’ajouter le
 
 ## Installation
 
-- Prérequis
+#### Prérequis
 
-  - Node
-  - `npm`
+- Node
+- `npm`
+
+#### Projet So Pekocko
 
 Créer un dossier racine dans lequel, il faudra ajouter le dossier du frontend et celui du backend :
 
@@ -47,9 +49,11 @@ Pour tester les 2 droits administrateur :
     - un rôle readWriteAnyDatabase
     - un rôle readWrite
   - Créer un fichier `.env` dans il faudra ajouter :
-    - `DB_ADMIN` en suivant l'exemple comme dans le fichier `.env.example` et utilisant le `<userName>`correspondant à l'utilisateur ayant le rôle readWriteAnyDatabase
-    - `DB_USER` en suivant l'exemple comme dans le fichier `.env.example` et utilisant le `<userName>`correspondant à l'utilisateur ayant le rôle readWrite
+    - `DB_ADMIN` en suivant l'exemple comme dans le fichier `.env.example` et en utilisant le `<userName>`correspondant à l'utilisateur ayant le rôle readWriteAnyDatabase
+    - `DB_USER` en suivant l'exemple comme dans le fichier `.env.example` et en utilisant le `<userName>`correspondant à l'utilisateur ayant le rôle readWrite
   - Modifier la ligne 17 du fichier `app.js`, en choisissant entre `process.env.DB_USER` et `process.env.DB_ADMIN`
+
+#### Application Piquante
 
 Se rendre sur http://localhost:4200 via le navigateur
 
@@ -62,7 +66,6 @@ Se rendre sur http://localhost:4200 via le navigateur
 |    Framework: Express    |
 |     Serveur: NodeJS      |
 | Base de données: MongoDB |
-|                          |
 
 Toutes les opérations de la base de données :
 
