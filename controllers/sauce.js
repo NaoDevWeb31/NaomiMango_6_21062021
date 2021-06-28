@@ -46,6 +46,22 @@ exports.getOneSauce = (req, res, next) => {
 
 // Import de la logique métier de la route PUT
 exports.modifySauce = (req, res, next) => {
+    // Supprimer l'ancienne image
+    if (req.file){
+        // Utiliser l'ID reçu comme paramètre pour accéder à la Sauce correspondant dans la base de données
+        Sauce.findOne({ _id: req.params.id })
+            .then(sauce => {
+                // Utiliser le segment "/images/" de notre URL d'image pour extraire le nom du fichier à supprimer
+                const filename = sauce.imageUrl.split("/images/")[1];
+                // Passer comme paramètres le fichier à supprimer et le callback à exécuter une fois ce fichier supprimé
+                fs.unlink(`images/${filename}`, (error) => {
+                    // Implémenter la logique d'origine en supprimant la Sauce de la base de données
+                    if (error){
+                        throw "L'ancienne image a bien été supprimée !";
+                    }
+                });
+            });
+    };
     // Créer un objet "sauceObject" qui regarde si "req.file" existe ou non
     const sauceObject = req.file ?
         // S'il existe, traiter la nouvelle image
@@ -99,7 +115,7 @@ exports.getAllSauces = (req, res, next) => {
 exports.likeDislikeSauce = (req, res, next) => {
     // Identifiant de la sauce
     let sauceId = req.params.id;
-    // Like envoyé dans corps de la reqûete
+    // Like envoyé dans corps de la requête
     let like = req.body.like;
     // UserId de l'utilisateur qui a créé la sauce
     let userId = req.body.userId;
