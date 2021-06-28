@@ -14,7 +14,7 @@ const userRoutes = require("./routes/user");
 const sauceRoutes = require("./routes/sauce");
 
 // Connecter l'API au cluster MongoDB Atlas
-mongoose.connect(process.env.DB_URI,
+mongoose.connect(process.env.DB_USER,
     {
         useCreateIndex: true,
         useNewUrlParser: true,
