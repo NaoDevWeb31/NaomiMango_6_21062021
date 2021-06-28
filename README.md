@@ -34,6 +34,7 @@ Créer un dossier racine dans lequel, il faudra ajouter le dossier du frontend e
   - Ouvrir le terminal et se déplacer dans le dossier créé
   - exécuter `npm install`
   - exécuter `npm start`
+  - Créer un fichier `.env` dans lequel il faut ajouter `SESSION_SECRET` en suivant l'exemple comme dans le fichier `.env.example`
 
 #### Connexion à MongoDB
 
@@ -123,3 +124,10 @@ Le nombre de likes/dislikes et les tableaux like/dislike doivent être mis à jo
 - les adresses mails de la base de données :
   - sont uniques
   - un plugin Mongoose approprié est utilisé pour s’assurer de leur caractère unique et rapporter des erreurs
+
+## Instructions
+
+Pour plus de détails sur les instructions de ce projet :
+
+- [Note de cadrage](rules/Note de cadrage So Pekocko V3.pdf)
+- [Guidelines](rules/Guidelines API.pdf)
