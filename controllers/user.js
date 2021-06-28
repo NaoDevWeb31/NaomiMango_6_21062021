@@ -1,19 +1,28 @@
 // Import des packages dans le contrôleur
 const bcrypt = require("bcrypt"); // Chiffre et crée un hash des mdp
 const jwt = require('jsonwebtoken'); // Créer des tokens et les vérifie
+const MaskData = require("maskdata"); // Masque les données
 // Import du modèle dans l'appli
 const User = require("../models/User");
+
+// Configurer les options de masquage de l'adresse email
+const emailMask2Options = {
+    maskWith: "*",
+    unmaskedStartCharactersBeforeAt: 0,
+    unmaskedEndCharactersAfterAt: 3,
+    maskAtTheRate: false,
+};
 
 exports.signup = (req, res, next) => {
     // Chiffrer le mdp
     bcrypt
-        // Saler le mdp 10 fois
+        // Hacher le mdp et le saler 10 fois
         .hash(req.body.password, 10)
         // Recevoir le hash généré
         .then(hash => {
             // Créer un utilisateur
             const user = new User({
-                email: req.body.email,
+                email: MaskData.maskEmail2(req.body.email, emailMask2Options), // Masquer l'adresse email
                 password: hash
             });
             // L'enregistrer dans la base de données
@@ -26,7 +35,7 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
     // Récupérer l'email saisie
-    User.findOne({ email: req.body.email })
+    User.findOne({ email: MaskData.maskEmail2(req.body.email, emailMask2Options) })  // Masquer l'adresse email
         .then(user => {
             // Si l'utilisateur ne correspond pas à un utilisateur existant de la base de données
             if (!user) {
