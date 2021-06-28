@@ -129,5 +129,5 @@ Le nombre de likes/dislikes et les tableaux like/dislike doivent être mis à jo
 
 Pour plus de détails sur les instructions de ce projet :
 
-- [Note de cadrage](rules/Note de cadrage So Pekocko V3.pdf)
-- [Guidelines](rules/Guidelines API.pdf)
+- [Note de cadrage](https://github.com/NaoDevWeb31/NaomiMango_6_22062021/blob/main/rules/Note%20de%20cadrage%20So%20Pekocko%20V3.pdf)
+- [Guidelines API](https://github.com/NaoDevWeb31/NaomiMango_6_22062021/blob/main/rules/Guidelines%20API.pdf)
