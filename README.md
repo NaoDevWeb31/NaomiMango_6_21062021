@@ -124,6 +124,7 @@ Le nombre de likes/dislikes et les tableaux like/dislike doivent être mis à jo
 - les adresses mails de la base de données :
   - sont uniques
   - un plugin Mongoose approprié est utilisé pour s’assurer de leur caractère unique et rapporter des erreurs
+- Utiliser des méthodes de masquage du côté API et base de données pour protéger les données personnelles des utilisateurs
 
 ## Instructions
 
