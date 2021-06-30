@@ -1,9 +1,9 @@
 // Import du packages dans l'appli
 const passwordValidator = require("password-validator");
- 
+
 // Créer un schéma
 const passwordSchema = new passwordValidator();
- 
+
 // Lui ajouter les propriétés suivantes
 passwordSchema
     .is().min(8)                                    // Minimum length 8

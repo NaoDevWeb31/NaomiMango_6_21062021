@@ -55,7 +55,6 @@ exports.modifySauce = (req, res, next) => {
                 const filename = sauce.imageUrl.split("/images/")[1];
                 // Passer comme paramètres le fichier à supprimer et le callback à exécuter une fois ce fichier supprimé
                 fs.unlink(`images/${filename}`, (error) => {
-                    // Implémenter la logique d'origine en supprimant la Sauce de la base de données
                     if (error){
                         throw "L'ancienne image a bien été supprimée !";
                     }

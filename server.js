@@ -51,5 +51,5 @@ server.on("listening", () => {
     console.log("Listening on " + bind);
 });
 
-// Configuer le serveur pour qu'il écoute le port approprié
+// Configurer le serveur pour qu'il écoute le port approprié
 server.listen(port);
