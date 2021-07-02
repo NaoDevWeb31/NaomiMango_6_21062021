@@ -38,7 +38,7 @@ Créer un dossier racine dans lequel, il faudra ajouter le dossier du frontend e
 
 #### Connexion à MongoDB
 
-Pour tester les 2 droits administrateur :
+Pour connecter l'application à la base de données (avec 1 ou 2 droits administrateur) :
 
 - Première façon en utilisant ma base de données :
   - Modifier la ligne 17 du fichier `app.js`, en choisissant entre `process.env.DB_USER` et `process.env.DB_ADMIN`
@@ -70,8 +70,7 @@ Se rendre sur http://localhost:4200 via le navigateur
 
 Toutes les opérations de la base de données :
 
-- doivent utiliser le pack Mongoose
-- avec des schémas de données stricts
+- doivent utiliser le pack Mongoose avec des schémas de données stricts
 
 #### Routes API
 
