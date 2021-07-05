@@ -41,6 +41,7 @@ Créer un dossier racine dans lequel, il faudra ajouter le dossier du frontend e
 Pour connecter l'application à la base de données (avec 1 ou 2 droits administrateur) :
 
 - Première façon en utilisant ma base de données :
+  - Me demander mes codes `DB_USER` et `DB_ADMIN`
   - Modifier la ligne 17 du fichier `app.js`, en choisissant entre `process.env.DB_USER` et `process.env.DB_ADMIN`
 - Deuxième façon en utilisant votre propre base de données :
   - Créer un fichier `.env` dans il faudra ajouter `DB_URI` en suivant l'exemple comme dans le fichier `.env.example`
